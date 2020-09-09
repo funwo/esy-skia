@@ -129,6 +129,10 @@ def git_checkout_to_directory(git, repo, checkoutable, directory, verbose):
   """
   if not os.path.isdir(directory):
     subprocess.check_call(
+      [git, 'config', 'http.proxy', 'socks5://127.0.0.1:4124'])
+    subprocess.check_call(
+      [git, 'config', 'https.proxy', 'socks5://127.0.0.1:4124'])
+    subprocess.check_call(
       [git, 'clone', '--quiet', repo, directory])
 
   if not is_git_toplevel(git, directory):
